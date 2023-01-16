@@ -1,0 +1,135 @@
+<!DOCTYPE html style="height:100%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Visualizing Worldwide Contrasts</title>
+    <script src="./charts/main.js"></script>
+    <script src="./charts/choropleth.js"></script>
+    <script src="./charts/worldRank.js"></script>
+    <script src="./charts/radarChart.js"></script>
+    <script src="./charts/spanChart.js"></script>
+    <script src="./charts/scatteredDotChart.js"></script>
+    <script src="./d3modules/d3.min.js"></script>
+    <script src="./d3modules/topojson.js"></script>
+    <script src='./charts/legend.js'></script>
+    <script src='./charts/parallelChart.js'></script>
+    <link rel="shortcut icon" href="#">
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body onload="init()">
+    <div style='display: flex; align-items: center; justify-content: center'>
+      <div>
+        <div class='w3-container' style='height: 5px; width: 100%'></div>
+        <div class='w3-container topBar'>
+          <div class='w3-container mapTitle'><p><b>Choropleth World Map</b></p></div>
+          <div class='w3-container worldRankTitle'>
+            <p><b>World Rank</b></p>
+            <p id='worldRankFilter'>Temperature</p>
+          </div>
+          <div class='w3-container spanChartTitle'>
+            <p><b>Span Chart with averages per Continent in relation to</b></p>
+            <p id ='spanChartFilter'>Temperature</p>
+          </div>
+        </div>
+        <div style="width: 100%; height: 355px; display:flex;">
+          <div class='w3-container buttonContainer' id='buttonContainer'>
+            <div class='w3-container button' id="sortByCorruption">
+              <p>Corruption</p>
+            </div>
+            <div class='w3-container button' id="sortByFreedom">
+              <p>Freedom</p>
+            </div>
+            <div class='w3-container button' id="sortByGDP">
+              <p>GDPPC</p>
+            </div>
+            <div class='w3-container button' id="sortByHappiness">
+              <p>Happiness</p>
+            </div>
+            <div class='w3-container button' id="sortByHealthcare">
+              <p>Healthcare</p>
+            </div>
+            <div class='w3-container button' id="sortBySafeness">
+              <p>Safeness</p>
+            </div>
+            <div class='w3-container button' id="sortByTemperature">
+              <p>Temperature</p>
+            </div>
+          </div>
+          <div id="map" class="w3-container mapContainer" style='background-color: #E3E3E1;'>
+            <svg id="vi1"></svg>
+          </div>
+
+          <div class='w3-container worldRankContainer'>
+            <div class='w3-container worldRankItem' id='worldRankItem1'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem2'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem3'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem4'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem5'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem6'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem7'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem8'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem9'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem10'></div>
+            <div class='w3-container worldRankItem' id='worldRankItem11'></div>
+          </div>
+
+          <div id="spanChart" class='w3-container spanChartContainer'>
+            <svg id="vi2"></svg>
+          </div>
+
+        </div>
+
+        <div class='w3-container topBar'>
+          <div class='w3-container pentagonoTitle'><p><b>Parallel Coordinates Chart</b></p></div>
+          <div class='w3-container scatteredPlotTitle'><p><b>Scattered Plot Attribute Comparison</b></p></div>
+        </div>
+        <div style="width: 100%; height: 375px; display:flex;">
+          <div class="w3-container comparisonCard" id="comparisonCard" style='display: flex; justify-content: center; align-items: center; flex-direction:column;'>
+            <div style='width: 100%; height: 25px; display: flex; flex-direction: row;'>
+              <div class='w3-container parallelBox' id='parallelCorruption' style='margin-left: 23px;'></div>
+              <div class='w3-container parallelBox' id='parallelFreedom' style='margin-left: 44px;'></div>
+              <div class='w3-container parallelBox' id='parallelGDP' style='margin-left: 45px;'></div>
+              <div class='w3-container parallelBox' id='parallelHappiness' style='margin-left: 45px;'></div>
+              <div class='w3-container parallelBox' id='parallelHealthcare' style='margin-left: 45px;'></div>
+              <div class='w3-container parallelBox' id='parallelSafeness' style='margin-left: 45px;'></div>
+              <div class='w3-container parallelBox' id='parallelTemperature' style='margin-left: 42px;'></div>
+            </div>
+          </div>
+          <div class='w3-container scatteredDotChartContainer'>
+            <div class='w3-container scatteredDotTop'>
+              <div style='width:75%; display: flex; align-items: center; justify-content:center;'>
+                <div class='w3-container' style='width: 180px; display:flex; align-items: center; justify-content: center;'>
+                  <p>Y axis:</p>
+                  <select class='customSelect' id="selectYAxis">
+                    <option value="corruption">Corruption</option>
+                    <option value="freedom">Freedom</option>
+                    <option value="gdp">GDPPC</option>
+                    <option value="happiness">Happiness</option>
+                    <option value="healthcare">HealthcareRank</option>
+                    <option value="safeness">Safeness</option>
+                    <option value="temperature">Temperature</option>
+                  </select>
+                </div>
+                <div class='w3-container' style='width: 180px; display:flex; align-items: center; justify-content: center;'>
+                  <p>X axis:</p>
+                  <select class='customSelect' id="selectXAxis">
+                    <option value="corruption">Corruption</option>
+                    <option value="freedom">Freedom</option>
+                    <option value="gdp">GDPPC</option>
+                    <option value="happiness">Happiness</option>
+                    <option value="healthcare">HealthcareRank</option>
+                    <option value="safeness">Safeness</option>
+                    <option value="temperature">Temperature</option>
+                  </select>
+                </div>
+              </div>
+              <div class='w3-container correlationBox' id='correlationBox'></div>
+            </div>
+            <div class='w3-container scatteredDotChart' id='scatteredDotChart'>
+              <svg id='vi3'></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

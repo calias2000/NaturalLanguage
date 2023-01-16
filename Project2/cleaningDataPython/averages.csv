@@ -1,0 +1,7 @@
+,continent,averageCorruption,averageFreedom,averageGDP,averageHappiness,averageSafeness,averageTemperature
+0,Europe,59.24,8.29,41300.37,6.42,1.66,8.67
+1,Asia,41.08,6.34,23956.36,5.38,2.17,17.81
+2,Africa,32.09,6.26,5458.38,4.52,2.28,23.91
+3,NorthAmerica,45.74,7.62,18771.39,6.17,2.12,22.7
+4,SouthAmerica,39.92,7.28,14941.33,5.91,2.16,21.15
+5,Oceania,55.83,7.93,19023.17,7.18,1.63,21.91

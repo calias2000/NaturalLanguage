@@ -1,0 +1,22 @@
+0 0 symbol = 5
+0
+
+0 2 T X 1
+2 3 I I 0
+3 0 A A 0
+
+0 2 T X 1
+2 3 I I 0
+3 0 O O 0
+
+0 7 T eps 1
+7 0 H 0 0
+
+0 7 T eps 1
+7 4 C C 0
+4 0 H H 0
+
+0 0 V F 1
+
+0 6 W W 1
+6 0 H eps 0
